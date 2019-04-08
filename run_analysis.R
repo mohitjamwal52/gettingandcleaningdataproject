@@ -1,18 +1,21 @@
 library(data.table)
 library(dplyr)
 
+#Basic Assumption
+#The R code in run_analysis.R proceeds under the assumption that the zip file UCI HAR dataset is
+#is downloaded and extracted in the R Home Directory.
 
 #loading the features and activity lables datasets
 featureNames <- read.table("UCI HAR Dataset/features.txt",col.names = c("n","functions"))
 activityLabels <- read.table("UCI HAR Dataset/activity_labels.txt", header = FALSE, col.names = c("n","activity"))
 
 
-#reading training data
+#reading training data set
 subjectTrain <- read.table("UCI HAR Dataset/train/subject_train.txt", header = FALSE, col.names = "subject")
 activityTrain <- read.table("UCI HAR Dataset/train/y_train.txt", header = FALSE, col.names = "code")
 featuresTrain <- read.table("UCI HAR Dataset/train/X_train.txt", header = FALSE, col.names = featureNames$functions)
 
-#reading testsubjectTest 
+#reading testsubject dataset 
 subjectTest <- read.table("UCI HAR Dataset/test/subject_test.txt", header = FALSE, col.names = "subject")
 activityTest <- read.table("UCI HAR Dataset/test/y_test.txt", header = FALSE, col.names = "code")
 featuresTest <- read.table("UCI HAR Dataset/test/X_test.txt", header = FALSE, col.names = featureNames$functions) 
@@ -49,7 +52,7 @@ names(measurementMeanSTD)<-gsub("angle", "Angle", names(measurementMeanSTD))
 names(measurementMeanSTD)<-gsub("gravity", "Gravity", names(measurementMeanSTD))
 
 
-#Tidy data
+#Tidy data text file 
 measurementMeanSTD$subject <- as.factor(measurementMeanSTD$subject)
 measurementMeanSTD <- data.table(measurementMeanSTD)
 
